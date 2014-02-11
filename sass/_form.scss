@@ -1,0 +1,30 @@
+.button {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 7px;
+
+  display: inline-block;
+  font-weight:normal;
+  line-height: 1.4em;
+  margin-top: 10px;
+  margin-right: 20px;
+
+  padding: 9px 26px;
+  text-decoration: none;
+
+  &:hover {
+    background: rgba(255,255,255, 0.1);
+  }
+}
+
+.button-white {
+  color:white;
+}
+
+.button-gray {
+  color: #62656A;
+  border: 1px solid #9DA0A4;
+  &:hover {
+    background: rgba(0,0,0, 0.05);
+  }
+
+}

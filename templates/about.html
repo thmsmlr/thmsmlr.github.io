@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block tagline %}{{ page.metadata.tagline }}{% endblock %}
+{% block meta %}
+  {{ super() }}
+  {% if page.metadata.keywords %} <meta name="keywords" content="{{ page.metadata.keywords }}"> {% endif %}
+{% endblock %}
+
+{% block content %}
+  <article>
+    <div class="wrapper">
+      {{ page.html }}
+    </div>
+  </article>
+{% endblock %}

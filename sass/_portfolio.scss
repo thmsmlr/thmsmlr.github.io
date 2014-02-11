@@ -1,0 +1,87 @@
+.project {
+  color: white;
+  padding: 6.25em 0;
+  overflow:hidden;
+
+  .project-description {
+    width: 50%;
+    margin-right: 5%;
+    float:left;
+  }
+
+  &.project-right .project-description {
+    float:right;
+    margin-right: 0%;
+  }
+
+  .project-media {
+    width: 45%;
+    float:left;
+  }
+
+  &.project-right .project-media {
+    float:right;
+    margin-right: 5%;
+  }
+
+  .project-title {
+    font-size: 42px;
+    line-height: 1em;
+    margin-bottom: 2px;
+  }
+
+  p.caption + p {
+    margin: 20px 0;
+  }
+}
+
+#billclintonswag {
+  background: url('/images/billclintonswag_test.png')
+              hsl(214, 63%, 15%);
+  background-repeat: no-repeat;
+  background-position: calc(50% + 300px) 5%;
+
+}
+
+#watchtower {
+  color: white;
+  background-color: #2f2f2f;
+
+  iframe {
+    margin-top: 110px;
+    width:100%;
+  }
+}
+
+#nerfduino {
+  background: url('/images/nerfduino.png')
+              #ecf0f1;
+  background-repeat: no-repeat;
+  background-position: calc(50% - 260px) 10%;
+  color: #62656A;
+}
+
+#lambda {
+  background: url('/images/lambda.png')
+              #ecf0f1;
+  background-repeat: no-repeat;
+  background-position: calc(50% - 300px) 10%;
+  color: #62656A;
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 620px) {
+  header {
+    text-align:center;
+  }
+  .project {
+    .project-description, .project-media {
+      width: 100%;
+      margin-right: 0%;
+      float:none;
+    }
+
+    background-image:none !important;
+  }
+}

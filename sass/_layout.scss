@@ -1,0 +1,28 @@
+header {
+  background: #FFF;
+  padding: 40px 0 100px;
+}
+
+footer {
+  padding: 100px 0;
+}
+
+.wrapper {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.right {
+  float:right;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}

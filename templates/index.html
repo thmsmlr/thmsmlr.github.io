@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block tagline %}{{ page.metadata.tagline }}{% endblock %}
+{% block meta %}
+    {{ super() }}
+    {% if page.metadata.keywords %}<meta name="keywords" content="{{ page.metadata.keywords }}">{% endif %}
+{% endblock %}
+{% block content %}
+  <article id="watchtower" class="project">
+    <div class="wrapper">
+      <div class="project-description">
+        <h1 class="project-title">
+          Mortar Watchtower
+        </h1>
+        <p class="caption">Instant, local feedback for Apache Pig.</p>
+        <p>
+        Developing for Hadoop is a pain. Unlike software engineers, data scientists have to wait hours to see if their code worked. I imagine it's akin to writing code on punch cards. That's why I came up with Watchtower – a tool that evaluates your Apache Pig scripts locally, instantly feeding you the results.
+        </p>
+        <p>
+        Too often when writing scripts for Hadoop, your script fail after 8 hours because of a one-off error in the final UDF. Watchtower flushes out those errors instantly by running subsets of your data through your entire script.
+        </p>
+        <p>
+        Since launching this project with <a href="http://mortardata.com" target="_blank">Mortar Data</a> in July 2013, people have become pretty excited about it. You can see what they're saying <a href="http://bitly.com/bundles/o_1kfe5nkp1/1" target="_blank">here</a>.
+        </p>
+
+        <a href="http://blog.mortardata.com/post/57616292488/watchtower-light-table-for-apache-pig" 
+           target="_blank"
+           class="button button-white">Launch Blog Post</a>
+
+        <a href="http://github.com/mortardata/watchtower" 
+           target="_blank"
+           class="button button-white">View on GitHub</a>
+      </div>
+      <div class="project-media">
+        <iframe src="//player.vimeo.com/video/71818563" 
+                width="400" height="224" frameborder="0" 
+                webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+    </div>
+  </article>
+
+  <article id="lambda" class="project project-right">
+    <div class="wrapper">
+      <div class="project-description">
+        <h1 class="project-title">
+          Lambda Playground
+        </h1>
+        <p class="caption">A Lambda Calculus step reducer.</p>
+        <p>
+        In my 3A term at the University of Waterloo, I decided to take principles of programming languages. Initially I was drawn to it because I'm a huge fan of the professor, <a target="_blank" href="https://cs.uwaterloo.ca/~plragde/">Prabhakar Ragde</a>, but the content drew me in pretty quickly there after.
+        </p>
+        <p>
+        I was trying to come up with the predecessor function for Church numerals when I found myself fumbling over <a href="http://en.wikipedia.org/wiki/Beta_normal_form#Reduction_strategies" target="_blank">Normal Order Reduction</a>. I built this tool to help illustrate different reduction strategies in order to better understand things like <a href="http://en.wikipedia.org/wiki/Church_encoding" target="_blank">Chuch numerals</a> and the notorious <a href="http://en.wikipedia.org/wiki/Fixed-point_combinator#Y_combinator" target="_blank">Y-Combinator</a>.
+        </p>
+
+        <a href="http://github.com/thmsmlr/lambda-playground" 
+           target="_blank"
+           class="button button-gray">View on GitHub</a>
+      </div>
+    </div>
+  </article>
+
+  <article id="billclintonswag" class="project">
+    <div class="wrapper">
+      <div class="project-description">
+        <h1 class="project-title">
+          Bill Clinton Swag
+        </h1>
+        <p class="caption">A site dedicated to showing the world Bill Clinton's swagger.</p>
+        <p>
+        Bored at school, I took a couple of days off to build a Bill Clinton meme generator. Since it’s launch, <a href="http://billclintonswag.com" target="_blank">billclintonswag.com</a> has seen moderate success, with over 35 000 photos of Bill Clinton generated. Yup, that’s right. I have a S3 bucket with 35 000 photos of Bill Clinton in it.
+        </p>
+        <p>
+        Unfortunately, Heroku wants me to pay money to use their hosting. As a result the site is currently down. But good news everyone! I've rewritten the application and once I do a database migration, the site will be up and running.
+        </p>
+        <p>
+        Until then, you can check out the broken site.
+        </p>
+
+        <a href="http://billclintonswag.com" 
+           target="_blank" 
+           class="button button-white">See the Swag</a>
+      </div>
+    </div>
+  </article>
+
+  <article id="nerfduino" class="project project-right">
+    <div class="wrapper">
+      <div class="project-description">
+        <h1 class="project-title">
+          NerfDuino 9000
+        </h1>
+        <p class="caption">
+          A Dorm Security System.
+        </p>
+        <p>
+          Back in first year, my friend developed a nasty habit of coming into my room drunk at 4am wanting to party. Usually I'd be down, but not when I had 8:30am class. I could've just locked my door to solve the problem, but that isn't very Canadian of me now is it! So NerfDuino 9000 was born.
+        </p>
+        <p>
+          It's a Nerfgun hooked up to a laptop via an Arduino. What else needs to be said?
+        </p>
+        <a href="http://www.youtube.com/watch?list=PLC7A66A3C3CB6104F&v=NB72wU3mtlc" 
+           target="_blank" 
+           class="button button-gray">Intruder Videos</a>
+        <a href="http://www.youtube.com/watch?v=5EVu6-Orces" 
+           target="_blank" 
+           class="button button-gray">Behind the Scenes</a>
+      </div>
+    </div>
+  </article>
+{% endblock %}

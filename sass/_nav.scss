@@ -1,0 +1,30 @@
+header {
+  img {
+    display:inline-block;
+    vertical-align:middle;
+    height: 150px;
+    margin-right: 20px;
+  }
+}
+.header-title {
+  display:inline-block;
+  vertical-align:middle;
+}
+nav {
+  margin: 0 auto 30px;
+
+  a.nav-link {
+    font-weight:normal;
+    font-size: 14px;
+    color: $gray;
+    text-decoration:none;
+    float:right;
+    padding: 15px 10px;
+
+    &.active, &:hover {
+      color: $black;
+    }
+  }
+
+  overflow:hidden;
+}
