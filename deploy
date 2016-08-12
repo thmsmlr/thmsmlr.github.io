@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf _site/
+jekyll build
+git subtree push --prefix _site/ origin gh-pages

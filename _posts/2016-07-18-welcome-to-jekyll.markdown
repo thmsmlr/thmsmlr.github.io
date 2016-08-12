@@ -1,0 +1,85 @@
+---
+layout: post
+title:  "The David Spade Index"
+date:   2016-07-18 14:34:03 -0400
+categories: jekyll update
+---
+
+<p class="lead">Which Actors Are Hated by Critics but Loved by Fans? The David Spade Index is the best metric we have to answer this question.</p>
+
+For decades, moviegoers have turned to critics like Roger Ebert for a thumbs up or thumbs down review of a new release. We trusted the experts to tell us which movie was worth spending $12 and 2 hours of our lives, and while average janes and joes could debate, say, Bruce Willis’s performance in Die Hard over beers, Roger Ebert and his peers had the final word on actors’ performances. 
+
+Now, however, movie criticism has expanded from a print-centric field governed by a handful of specialists to the digital realm, open to anyone with an opinion. Websites like IMDb, Rotten Tomatoes and [Metacritic](http://www.metacritic.com/) aggregate both critic and audience reviews, and the opinions of audiences don’t always agree with the critics’ critiques.
+
+We analyzed the scores of thousands of movies to identify which actors and actresses are beloved by the audience—even though critics say their movies suck. If you love, hate, or love to hate Adam Sandler, Gerard Butler, Clint Eastwood, or a certain Chris Farley sidekick, you might want to read on. 
+
+## Fan Favorite or Critical Darling?
+![image](http://pix-media.s3.amazonaws.com/blog/1196/movies_scatter_movies_2.png)
+
+> Data via Open Movie Database (OMDb); chart by Kaylin Walker, Priceonomics
+
+How often do critics and audiences disagree? That’s what is shown in the above chart.
+
+In general, they agree on good movies: there's a lot less variability at the top right of the plot. (If audiences and critics agree about a movie, the point will fall close to the dashed line.) Though variability is a lot higher near the bottom left hand corner of the plot, it tends to fall above the dashed line—indicating that audiences often appreciate bad movies more than critics do. 
+
+
+## Lorem
+Quisque sodales euismod nibh, gravida venenatis nibh dignissim eget. Morbi gravida enim vel lectus aliquet aliquet.
+
+### Ipsum
+Nunc nec aliquam tellus. Etiam faucibus magna nibh, ut fermentum velit consectetur id. Nullam vehicula iaculis tortor, in cursus enim auctor vitae. Duis semper pulvinar justo, at vestibulum dolor. Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.
+
+> Nam vitae commodo ex. Nunc vel tellus leo.
+
+## Dugem
+Nullam vehicula iaculis tortor, in cursus enim auctor vitae. Duis semper pulvinar justo, at vestibulum dolor. Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.
+
+``` javascript
+function trigger_alert(){
+  alert("Lorem Ipsum dolor sit amet");
+}
+
+trigger_alert();
+```
+
+### Golem
+Quisque sodales euismod nibh, gravida venenatis nibh dignissim eget. Morbi gravida enim vel lectus aliquet aliquet.
+
+* Praesent commodo cursus magna.
+* Donec id elit non mi porta gravida at eget metus.
+* Nulla vitae elit libero, a pharetra augue.
+
+Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.
+
+1. Vestibulum id ligula porta felis euismod semper.
+2. Cum sociis natoque penatibus.
+3. Maecenas sed diam eget risus.
+
+Nam ante lacus, ornare ut lacus in, aliquet gravida orci. Donec non dignissim elit. Integer facilisis lorem sed porttitor elementum. Etiam a eleifend justo.
+
+HyperText Markup Language (HTML)
+: The language used to describe and define the content of a Web page
+
+Cascading Style Sheets (CSS)
+: Used to describe the appearance of Web content
+
+JavaScript (JS)
+: The programming language used to build advanced Web sites and applications
+
+Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.
+
+![Large example image](http://placehold.it/800x400 "Large example image")
+![Medium example image](http://placehold.it/400x200 "Medium example image")
+![Small example image](http://placehold.it/200x200 "Small example image")
+
+Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+|-----------------+------------+-----------------+----------------|
+| Default aligned |Left aligned| Center aligned  | Right aligned  |
+|-----------------|:-----------|:---------------:|---------------:|
+| First body part |Second cell | Third cell      | fourth cell    |
+| Second line     |foo         | **strong**      | baz            |
+| Third line      |quux        | baz             | bar            |
+|-----------------+------------+-----------------+----------------|
+
+Nullam quis risus eget urna mollis ornare vel eu leo.
