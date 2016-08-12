@@ -13,6 +13,12 @@ if [ -n "$CLEAN_REPO" ]; then
     exit 2
 fi
 
+UNPUSHED_COMMITS=$(git cherry -v)
+if [ -n "$UNPUSHED_COMMITS" ]; then
+    echo "ERROR! Unpushed commits on master. Please push all commits before deploying"
+    exit 3
+fi
+
 echo ""
 echo "=> Setting up clean build directory <="
 echo ""
