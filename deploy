@@ -19,6 +19,8 @@ if [ -n "$UNPUSHED_COMMITS" ]; then
     exit 3
 fi
 
+CURRENT_SHA=$(git rev-parse HEAD)
+
 echo ""
 echo "=> Setting up clean build directory <="
 echo ""
@@ -35,7 +37,7 @@ echo ""
 jekyll build
 pushd _site
 git aa
-git commit -m "`date` (`git rev-parse HEAD`)"
+git commit -m "`date` ($CURRENT_SHA)"
 
 echo ""
 echo "=> Deploying site <="
