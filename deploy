@@ -2,8 +2,8 @@
 set -e
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-if [ "$CURRENT_BRANCH" != "master" ]; then
-    echo "ERROR! You can only deploy from master branch"
+if [ "$CURRENT_BRANCH" != "jekyll" ]; then
+    echo "ERROR! You can only deploy from jekyll branch"
     exit 1
 fi
 
@@ -15,7 +15,7 @@ fi
 
 UNPUSHED_COMMITS=$(git cherry -v)
 if [ -n "$UNPUSHED_COMMITS" ]; then
-    echo "ERROR! Unpushed commits on master. Please push all commits before deploying"
+    echo "ERROR! Unpushed commits on jekyll branch. Please push all commits before deploying"
     exit 3
 fi
 
@@ -28,7 +28,7 @@ rm -rf _site
 git clone -b gh-pages git@github.com:thmsmlr/thmsmlr.github.io.git _site
 
 pushd _site
-rm -rf $(git ls-tree --name-only gh-pages)
+rm -rf $(git ls-tree --name-only master)
 popd
 
 echo ""
@@ -42,7 +42,7 @@ git commit -m "`date` ($CURRENT_SHA)"
 echo ""
 echo "=> Deploying site <="
 echo ""
-git push origin gh-pages
+git push origin master
 popd
 
 echo ""
