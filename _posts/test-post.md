@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "The David Spade Index"
-date:   2016-07-18 14:34:03 -0400
+date:   2016-08-12 14:34:03 -0400
 categories: jekyll update
 ---
 
