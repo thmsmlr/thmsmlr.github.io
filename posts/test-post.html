@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    
+      The David Spade Index
+    
+  </title>
+
+  <meta name="description"
+        content="Which Actors Are Hated by Critics but Loved by Fans? The David Spade Index is the best metric we have to answer this question.">
+
+  <link rel="stylesheet"
+        href="/css/main.css">
+
+  <link rel="canonical"
+        href="http://thmsmlr.com/posts/test-post">
+
+  <link rel="alternate"
+        type="application/rss+xml"
+        title="thmsmlr"
+        href="http://thmsmlr.com/feed.xml">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
+</head>
+
+
+  <body>
+
+    <div class="container">
+        <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">The David Spade Index</h1>
+  </header>
+
+  <div class="post-content">
+    <p class="lead">Which Actors Are Hated by Critics but Loved by Fans? The David Spade Index is the best metric we have to answer this question.</p>
+
+<p>For decades, moviegoers have turned to critics like Roger Ebert for a thumbs up or thumbs down review of a new release. We trusted the experts to tell us which movie was worth spending $12 and 2 hours of our lives, and while average janes and joes could debate, say, Bruce Willis’s performance in Die Hard over beers, Roger Ebert and his peers had the final word on actors’ performances.</p>
+
+<p>Now, however, movie criticism has expanded from a print-centric field governed by a handful of specialists to the digital realm, open to anyone with an opinion. Websites like IMDb, Rotten Tomatoes and <a href="http://www.metacritic.com/">Metacritic</a> aggregate both critic and audience reviews, and the opinions of audiences don’t always agree with the critics’ critiques.</p>
+
+<p>We analyzed the scores of thousands of movies to identify which actors and actresses are beloved by the audience—even though critics say their movies suck. If you love, hate, or love to hate Adam Sandler, Gerard Butler, Clint Eastwood, or a certain Chris Farley sidekick, you might want to read on.</p>
+
+<h2 id="fan-favorite-or-critical-darling">Fan Favorite or Critical Darling?</h2>
+<p><img src="http://pix-media.s3.amazonaws.com/blog/1196/movies_scatter_movies_2.png" alt="image" /></p>
+
+<blockquote>
+  <p>Data via Open Movie Database (OMDb); chart by Kaylin Walker, Priceonomics</p>
+</blockquote>
+
+<p>How often do critics and audiences disagree? That’s what is shown in the above chart.</p>
+
+<p>In general, they agree on good movies: there’s a lot less variability at the top right of the plot. (If audiences and critics agree about a movie, the point will fall close to the dashed line.) Though variability is a lot higher near the bottom left hand corner of the plot, it tends to fall above the dashed line—indicating that audiences often appreciate bad movies more than critics do.</p>
+
+<h2 id="lorem">Lorem</h2>
+<p>Quisque sodales euismod nibh, gravida venenatis nibh dignissim eget. Morbi gravida enim vel lectus aliquet aliquet.</p>
+
+<h3 id="ipsum">Ipsum</h3>
+<p>Nunc nec aliquam tellus. Etiam faucibus magna nibh, ut fermentum velit consectetur id. Nullam vehicula iaculis tortor, in cursus enim auctor vitae. Duis semper pulvinar justo, at vestibulum dolor. Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.</p>
+
+<blockquote>
+  <p>Nam vitae commodo ex. Nunc vel tellus leo.</p>
+</blockquote>
+
+<h2 id="dugem">Dugem</h2>
+<p>Nullam vehicula iaculis tortor, in cursus enim auctor vitae. Duis semper pulvinar justo, at vestibulum dolor. Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">cs_input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'cs-input'</span><span class="p">)</span>
+    <span class="p">,</span> <span class="nx">cs_button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'cs-send'</span><span class="p">)</span>
+    <span class="p">,</span> <span class="nx">cs_console</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'cs-console'</span><span class="p">);</span>
+
+  <span class="nx">cs_button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Tunnel</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'fromExtension'</span><span class="p">,</span> <span class="nx">cs_input</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">Tunnel</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="s1">'toExtension'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">cs_console</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">+=</span> <span class="s2">"=&gt; Received message from page: "</span> <span class="o">+</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"\n"</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">})();</span>
+</code></pre>
+</div>
+
+<h3 id="golem">Golem</h3>
+<p>Quisque sodales euismod nibh, gravida venenatis nibh dignissim eget. Morbi gravida enim vel lectus aliquet aliquet.</p>
+
+<ul>
+  <li>Praesent commodo cursus magna.</li>
+  <li>Donec id elit non mi porta gravida at eget metus.</li>
+  <li>Nulla vitae elit libero, a pharetra augue.</li>
+</ul>
+
+<p>Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.</p>
+
+<ol>
+  <li>Vestibulum id ligula porta felis euismod semper.</li>
+  <li>Cum sociis natoque penatibus.</li>
+  <li>Maecenas sed diam eget risus.</li>
+</ol>
+
+<p>Nam ante lacus, ornare ut lacus in, aliquet gravida orci. Donec non dignissim elit. Integer facilisis lorem sed porttitor elementum. Etiam a eleifend justo.</p>
+
+<dl>
+  <dt>HyperText Markup Language (HTML)</dt>
+  <dd>The language used to describe and define the content of a Web page</dd>
+  <dt>Cascading Style Sheets (CSS)</dt>
+  <dd>Used to describe the appearance of Web content</dd>
+  <dt>JavaScript (JS)</dt>
+  <dd>The programming language used to build advanced Web sites and applications</dd>
+</dl>
+
+<p>Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.</p>
+
+<p><img src="http://placehold.it/800x400" alt="Large example image" title="Large example image" />
+<img src="http://placehold.it/400x200" alt="Medium example image" title="Medium example image" />
+<img src="http://placehold.it/200x200" alt="Small example image" title="Small example image" /></p>
+
+<p>Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Default aligned</th>
+      <th style="text-align: left">Left aligned</th>
+      <th style="text-align: center">Center aligned</th>
+      <th style="text-align: right">Right aligned</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>First body part</td>
+      <td style="text-align: left">Second cell</td>
+      <td style="text-align: center">Third cell</td>
+      <td style="text-align: right">fourth cell</td>
+    </tr>
+    <tr>
+      <td>Second line</td>
+      <td style="text-align: left">foo</td>
+      <td style="text-align: center"><strong>strong</strong></td>
+      <td style="text-align: right">baz</td>
+    </tr>
+    <tr>
+      <td>Third line</td>
+      <td style="text-align: left">quux</td>
+      <td style="text-align: center">baz</td>
+      <td style="text-align: right">bar</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+
+  </div>
+
+  <div class="post-footer">
+    By: <a href="http://twitter.com/thmsmlr">@thmsmlr</a>
+  </div>
+</article>
+
+    </div>
+
+  </body>
+
+</html>
