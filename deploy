@@ -35,7 +35,7 @@ echo ""
 jekyll build
 pushd _site
 git aa
-git commit -m "Update: `date`"
+git commit -m "`date` (`git rev-parse HEAD`)"
 
 echo ""
 echo "=> Deploying site <="
