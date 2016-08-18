@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Duct-Taping GitHub Pages"
+title:  "Manual GitHub Pages Deployment"
 date:   2016-08-14 10:34:03 -0400
 ---
 
