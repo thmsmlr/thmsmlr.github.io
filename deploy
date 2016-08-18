@@ -34,7 +34,7 @@ popd
 echo ""
 echo "=> Building site <="
 echo ""
-jekyll build
+JEKYLL_ENV=production jekyll build
 pushd _site
 git aa
 git commit -m "`date` ($CURRENT_SHA)"
