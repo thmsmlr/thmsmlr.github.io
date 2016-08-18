@@ -6,137 +6,120 @@
 </description>
     <link>http://thmsmlr.com/</link>
     <atom:link href="http://thmsmlr.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 12 Aug 2016 14:52:14 -0400</pubDate>
-    <lastBuildDate>Fri, 12 Aug 2016 14:52:14 -0400</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2016 22:43:25 -0400</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2016 22:43:25 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
-        <title>The David Spade Index</title>
-        <description>&lt;p class=&quot;lead&quot;&gt;Which Actors Are Hated by Critics but Loved by Fans? The David Spade Index is the best metric we have to answer this question.&lt;/p&gt;
+        <title>Duct-Taping GitHub Pages</title>
+        <description>&lt;p class=&quot;lead&quot;&gt;Batteries included can serve you well, but sometimes you just want more control.&lt;/p&gt;
 
-&lt;p&gt;For decades, moviegoers have turned to critics like Roger Ebert for a thumbs up or thumbs down review of a new release. We trusted the experts to tell us which movie was worth spending $12 and 2 hours of our lives, and while average janes and joes could debate, say, Bruce Willis’s performance in Die Hard over beers, Roger Ebert and his peers had the final word on actors’ performances.&lt;/p&gt;
+&lt;p&gt;GitHub Pages provides an easy, free way to host a website.
+However there are two flavours in which you can use GitHub pages, the &lt;a href=&quot;https://help.github.com/articles/using-a-static-site-generator-other-than-jekyll/&quot;&gt;manually&lt;/a&gt; way, or the &lt;a href=&quot;https://help.github.com/articles/about-github-pages-and-jekyll/&quot;&gt;batteries included&lt;/a&gt; way.&lt;/p&gt;
 
-&lt;p&gt;Now, however, movie criticism has expanded from a print-centric field governed by a handful of specialists to the digital realm, open to anyone with an opinion. Websites like IMDb, Rotten Tomatoes and &lt;a href=&quot;http://www.metacritic.com/&quot;&gt;Metacritic&lt;/a&gt; aggregate both critic and audience reviews, and the opinions of audiences don’t always agree with the critics’ critiques.&lt;/p&gt;
+&lt;p&gt;The batteries included way is dead simple.
+Using the open-source static site generator &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;, GitHub will generate and deploy your site on push to &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; (or &lt;code class=&quot;highlighter-rouge&quot;&gt;gh-pages&lt;/code&gt; if on project page).
+This is a great solution that allow users to get up and running with a site quickly, but has some limitations.
+Namely the ability to heavily customize your site.&lt;/p&gt;
 
-&lt;p&gt;We analyzed the scores of thousands of movies to identify which actors and actresses are beloved by the audience—even though critics say their movies suck. If you love, hate, or love to hate Adam Sandler, Gerard Butler, Clint Eastwood, or a certain Chris Farley sidekick, you might want to read on.&lt;/p&gt;
+&lt;p&gt;Suppose I wanted to modify Jekyll to generate blog posts from &lt;a href=&quot;http://jupyter.org/&quot;&gt;Jupyter Notebooks&lt;/a&gt;.
+I could modify the Jekyll codebase, or write a plugin that could render the notebooks into blog posts.
+This would work locally, but since the batteries included method doesn’t run any custom code, I would have no way of deploying.
+For that reason I wrote a script to managed the deploys of my site manually.&lt;/p&gt;
 
-&lt;h2 id=&quot;fan-favorite-or-critical-darling&quot;&gt;Fan Favorite or Critical Darling?&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;http://pix-media.s3.amazonaws.com/blog/1196/movies_scatter_movies_2.png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The principle is to keep your code and build branches clean and separated from each other while having meaningful links and relations guaranteed.
+It allows you to customize the build of your site as much as you want while keeping the simplicity of GitHub pages.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Data via Open Movie Database (OMDb); chart by Kaylin Walker, Priceonomics&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Here’s what I came up with:&lt;/p&gt;
 
-&lt;p&gt;How often do critics and audiences disagree? That’s what is shown in the above chart.&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; -e
 
-&lt;p&gt;In general, they agree on good movies: there’s a lot less variability at the top right of the plot. (If audiences and critics agree about a movie, the point will fall close to the dashed line.) Though variability is a lot higher near the bottom left hand corner of the plot, it tends to fall above the dashed line—indicating that audiences often appreciate bad movies more than critics do.&lt;/p&gt;
+&lt;span class=&quot;nv&quot;&gt;CURRENT_BRANCH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;git rev-parse --abbrev-ref HEAD&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CURRENT_BRANCH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ERROR! You can only deploy from jekyll branch&quot;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;h2 id=&quot;lorem&quot;&gt;Lorem&lt;/h2&gt;
-&lt;p&gt;Quisque sodales euismod nibh, gravida venenatis nibh dignissim eget. Morbi gravida enim vel lectus aliquet aliquet.&lt;/p&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;CLEAN_REPO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;git status --porcelain&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -n &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CLEAN_REPO&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ERROR! Untracked changes in the repo, commit all changes before deploying&quot;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;2
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;h3 id=&quot;ipsum&quot;&gt;Ipsum&lt;/h3&gt;
-&lt;p&gt;Nunc nec aliquam tellus. Etiam faucibus magna nibh, ut fermentum velit consectetur id. Nullam vehicula iaculis tortor, in cursus enim auctor vitae. Duis semper pulvinar justo, at vestibulum dolor. Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.&lt;/p&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;UNPUSHED_COMMITS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;git cherry -v&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -n &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UNPUSHED_COMMITS&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ERROR! Unpushed commits on jekyll branch. Please push all commits before deploying&quot;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;3
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;blockquote&gt;
-  &lt;p&gt;Nam vitae commodo ex. Nunc vel tellus leo.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;CURRENT_SHA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
 
-&lt;h2 id=&quot;dugem&quot;&gt;Dugem&lt;/h2&gt;
-&lt;p&gt;Nullam vehicula iaculis tortor, in cursus enim auctor vitae. Duis semper pulvinar justo, at vestibulum dolor. Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.&lt;/p&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;=&amp;gt; Setting up clean build directory &amp;lt;=&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+rm -rf _site
+git clone -b master git@github.com:thmsmlr/thmsmlr.github.io.git _site
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cs_input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;cs-input&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cs_button&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;cs-send&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cs_console&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;cs-console&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;pushd &lt;/span&gt;_site
+rm -rf &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;git ls-tree --name-only master&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;popd
 
-  &lt;span class=&quot;nx&quot;&gt;cs_button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;click&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;Tunnel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;fromExtension&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cs_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;=&amp;gt; Building site &amp;lt;=&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+jekyll build
+&lt;span class=&quot;nb&quot;&gt;pushd &lt;/span&gt;_site
+git aa
+git commit -m &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; (&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CURRENT_SHA&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;)&quot;&lt;/span&gt;
 
-  &lt;span class=&quot;nx&quot;&gt;Tunnel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;toExtension&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;cs_console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerText&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;=&amp;gt; Received message from page: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;\n&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;=&amp;gt; Deploying site &amp;lt;=&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+git push origin master
+&lt;span class=&quot;nb&quot;&gt;popd
+
+echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;=&amp;gt; Cleaning up &amp;lt;=&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+rm -rf _site
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;golem&quot;&gt;Golem&lt;/h3&gt;
-&lt;p&gt;Quisque sodales euismod nibh, gravida venenatis nibh dignissim eget. Morbi gravida enim vel lectus aliquet aliquet.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;em&gt;that since I was building a &lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/&quot;&gt;user site&lt;/a&gt;, the GitHub Pages branch was the &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; branch, my HEAD and code branch was the &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; branch&lt;/em&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Praesent commodo cursus magna.&lt;/li&gt;
-  &lt;li&gt;Donec id elit non mi porta gravida at eget metus.&lt;/li&gt;
-  &lt;li&gt;Nulla vitae elit libero, a pharetra augue.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.&lt;/p&gt;
+&lt;p&gt;I had three goals with this script:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Vestibulum id ligula porta felis euismod semper.&lt;/li&gt;
-  &lt;li&gt;Cum sociis natoque penatibus.&lt;/li&gt;
-  &lt;li&gt;Maecenas sed diam eget risus.&lt;/li&gt;
+  &lt;li&gt;Each deploy should only have build files, no Jekyll code allowed!&lt;/li&gt;
+  &lt;li&gt;Each build should link to the code commit from which it was generated&lt;/li&gt;
+  &lt;li&gt;Code commits and build commits should always be in sync&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Nam ante lacus, ornare ut lacus in, aliquet gravida orci. Donec non dignissim elit. Integer facilisis lorem sed porttitor elementum. Etiam a eleifend justo.&lt;/p&gt;
+&lt;p&gt;To achieve the first goal, I had to make a orphaned &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; branch which represented the lineage of compiled, deployed assets.
+On deploy, the script would clone the &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; branch into the build directory &lt;code class=&quot;highlighter-rouge&quot;&gt;_site/&lt;/code&gt;, nuke the current build, build the new site, commit the changes and push.
+This would make sure that only the build in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_site/&lt;/code&gt; directory would get pushed to master.
+Furthermore, since it clones the repository on each build and nukes the files, this method ensures that we get clean diffs of what changed between builds.&lt;/p&gt;
 
-&lt;dl&gt;
-  &lt;dt&gt;HyperText Markup Language (HTML)&lt;/dt&gt;
-  &lt;dd&gt;The language used to describe and define the content of a Web page&lt;/dd&gt;
-  &lt;dt&gt;Cascading Style Sheets (CSS)&lt;/dt&gt;
-  &lt;dd&gt;Used to describe the appearance of Web content&lt;/dd&gt;
-  &lt;dt&gt;JavaScript (JS)&lt;/dt&gt;
-  &lt;dd&gt;The programming language used to build advanced Web sites and applications&lt;/dd&gt;
-&lt;/dl&gt;
+&lt;p&gt;For the second goal, I took advantage of the fact that GitHub does &lt;a href=&quot;https://help.github.com/articles/autolinked-references-and-urls/#commit-shas&quot;&gt;auto-linking&lt;/a&gt; of commits, issues, and pull requests.
+When the script pushes the new build to master, it does so with a commit message that contains the SHA of the latest code on the &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; branch.
+GitHub will automatically turn that into a link when viewing the code on their website.&lt;/p&gt;
 
-&lt;p&gt;Sed nisi nunc, dictum sit amet gravida in, finibus rhoncus orci. Donec scelerisque commodo turpis ac venenatis.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/github-deploy-commit-message.png&quot; alt=&quot;GitHub Deploy Commit Message&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://placehold.it/800x400&quot; alt=&quot;Large example image&quot; title=&quot;Large example image&quot; /&gt;
-&lt;img src=&quot;http://placehold.it/400x200&quot; alt=&quot;Medium example image&quot; title=&quot;Medium example image&quot; /&gt;
-&lt;img src=&quot;http://placehold.it/200x200&quot; alt=&quot;Small example image&quot; title=&quot;Small example image&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Finally, we make sure the commits are always sync’d by enforcing that there are no uncommitted changes in the &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; branch before deploying.
+Obviously you can manually mess things up, but it’s a good enough for now.&lt;/p&gt;
 
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+&lt;p&gt;This script will allow me to customize and complicate the build my site while maintaining some sanity in my builds.
+Feel free to use this script as a basis for your own GitHub pages deployment, you’ll probably need to modify it quite heavily for your use case, but I think the idea behind it is simple enough.&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Default aligned&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Left aligned&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Center aligned&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;Right aligned&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;First body part&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Second cell&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Third cell&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;fourth cell&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Second line&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;foo&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;strong&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;baz&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Third line&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;quux&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;baz&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;bar&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;Hope you find it useful.&lt;/p&gt;
 
-&lt;p&gt;Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 12 Aug 2016 10:34:03 -0400</pubDate>
-        <link>http://thmsmlr.com/posts/test-post</link>
-        <guid isPermaLink="true">http://thmsmlr.com/posts/test-post</guid>
+        <pubDate>Sun, 14 Aug 2016 10:34:03 -0400</pubDate>
+        <link>http://thmsmlr.com/posts/duct-taping-github-pages</link>
+        <guid isPermaLink="true">http://thmsmlr.com/posts/duct-taping-github-pages</guid>
         
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     

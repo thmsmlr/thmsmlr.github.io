@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    
+      Duct-Taping GitHub Pages
+    
+  </title>
+
+  <meta name="description"
+        content="Batteries included can serve you well, but sometimes you just want more control.">
+
+  <link rel="stylesheet"
+        href="/css/main.css">
+
+  <link rel="canonical"
+        href="http://thmsmlr.com/posts/duct-taping-github-pages">
+
+  <link rel="alternate"
+        type="application/rss+xml"
+        title="thmsmlr"
+        href="http://thmsmlr.com/feed.xml">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
+</head>
+
+
+  <body>
+
+    <div class="container">
+        <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">Duct-Taping GitHub Pages</h1>
+  </header>
+
+  <div class="post-content">
+    <p class="lead">Batteries included can serve you well, but sometimes you just want more control.</p>
+
+<p>GitHub Pages provides an easy, free way to host a website.
+However there are two flavours in which you can use GitHub pages, the <a href="https://help.github.com/articles/using-a-static-site-generator-other-than-jekyll/">manually</a> way, or the <a href="https://help.github.com/articles/about-github-pages-and-jekyll/">batteries included</a> way.</p>
+
+<p>The batteries included way is dead simple.
+Using the open-source static site generator <a href="https://jekyllrb.com/">Jekyll</a>, GitHub will generate and deploy your site on push to <code class="highlighter-rouge">master</code> (or <code class="highlighter-rouge">gh-pages</code> if on project page).
+This is a great solution that allow users to get up and running with a site quickly, but has some limitations.
+Namely the ability to heavily customize your site.</p>
+
+<p>Suppose I wanted to modify Jekyll to generate blog posts from <a href="http://jupyter.org/">Jupyter Notebooks</a>.
+I could modify the Jekyll codebase, or write a plugin that could render the notebooks into blog posts.
+This would work locally, but since the batteries included method doesn’t run any custom code, I would have no way of deploying.
+For that reason I wrote a script to managed the deploys of my site manually.</p>
+
+<p>The principle is to keep your code and build branches clean and separated from each other while having meaningful links and relations guaranteed.
+It allows you to customize the build of your site as much as you want while keeping the simplicity of GitHub pages.</p>
+
+<p>Here’s what I came up with:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="nb">set</span> -e
+
+<span class="nv">CURRENT_BRANCH</span><span class="o">=</span><span class="k">$(</span>git rev-parse --abbrev-ref HEAD<span class="k">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$CURRENT_BRANCH</span><span class="s2">"</span> !<span class="o">=</span> <span class="s2">"jekyll"</span> <span class="o">]</span>; <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"ERROR! You can only deploy from jekyll branch"</span>
+    <span class="nb">exit </span>1
+<span class="k">fi
+
+</span><span class="nv">CLEAN_REPO</span><span class="o">=</span><span class="k">$(</span>git status --porcelain<span class="k">)</span>
+<span class="k">if</span> <span class="o">[</span> -n <span class="s2">"</span><span class="nv">$CLEAN_REPO</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"ERROR! Untracked changes in the repo, commit all changes before deploying"</span>
+    <span class="nb">exit </span>2
+<span class="k">fi
+
+</span><span class="nv">UNPUSHED_COMMITS</span><span class="o">=</span><span class="k">$(</span>git cherry -v<span class="k">)</span>
+<span class="k">if</span> <span class="o">[</span> -n <span class="s2">"</span><span class="nv">$UNPUSHED_COMMITS</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"ERROR! Unpushed commits on jekyll branch. Please push all commits before deploying"</span>
+    <span class="nb">exit </span>3
+<span class="k">fi
+
+</span><span class="nv">CURRENT_SHA</span><span class="o">=</span><span class="k">$(</span>git rev-parse HEAD<span class="k">)</span>
+
+<span class="nb">echo</span> <span class="s2">""</span>
+<span class="nb">echo</span> <span class="s2">"=&gt; Setting up clean build directory &lt;="</span>
+<span class="nb">echo</span> <span class="s2">""</span>
+rm -rf _site
+git clone -b master git@github.com:thmsmlr/thmsmlr.github.io.git _site
+
+<span class="nb">pushd </span>_site
+rm -rf <span class="k">$(</span>git ls-tree --name-only master<span class="k">)</span>
+<span class="nb">popd
+
+echo</span> <span class="s2">""</span>
+<span class="nb">echo</span> <span class="s2">"=&gt; Building site &lt;="</span>
+<span class="nb">echo</span> <span class="s2">""</span>
+jekyll build
+<span class="nb">pushd </span>_site
+git aa
+git commit -m <span class="s2">"</span><span class="sb">`</span>date<span class="sb">`</span><span class="s2"> (</span><span class="nv">$CURRENT_SHA</span><span class="s2">)"</span>
+
+<span class="nb">echo</span> <span class="s2">""</span>
+<span class="nb">echo</span> <span class="s2">"=&gt; Deploying site &lt;="</span>
+<span class="nb">echo</span> <span class="s2">""</span>
+git push origin master
+<span class="nb">popd
+
+echo</span> <span class="s2">""</span>
+<span class="nb">echo</span> <span class="s2">"=&gt; Cleaning up &lt;="</span>
+<span class="nb">echo</span> <span class="s2">""</span>
+rm -rf _site
+</code></pre>
+</div>
+
+<p><strong>NOTE:</strong> <em>that since I was building a <a href="https://help.github.com/articles/user-organization-and-project-pages/">user site</a>, the GitHub Pages branch was the <code class="highlighter-rouge">master</code> branch, my HEAD and code branch was the <code class="highlighter-rouge">jekyll</code> branch</em></p>
+
+<p>I had three goals with this script:</p>
+
+<ol>
+  <li>Each deploy should only have build files, no Jekyll code allowed!</li>
+  <li>Each build should link to the code commit from which it was generated</li>
+  <li>Code commits and build commits should always be in sync</li>
+</ol>
+
+<p>To achieve the first goal, I had to make a orphaned <code class="highlighter-rouge">master</code> branch which represented the lineage of compiled, deployed assets.
+On deploy, the script would clone the <code class="highlighter-rouge">master</code> branch into the build directory <code class="highlighter-rouge">_site/</code>, nuke the current build, build the new site, commit the changes and push.
+This would make sure that only the build in the <code class="highlighter-rouge">_site/</code> directory would get pushed to master.
+Furthermore, since it clones the repository on each build and nukes the files, this method ensures that we get clean diffs of what changed between builds.</p>
+
+<p>For the second goal, I took advantage of the fact that GitHub does <a href="https://help.github.com/articles/autolinked-references-and-urls/#commit-shas">auto-linking</a> of commits, issues, and pull requests.
+When the script pushes the new build to master, it does so with a commit message that contains the SHA of the latest code on the <code class="highlighter-rouge">jekyll</code> branch.
+GitHub will automatically turn that into a link when viewing the code on their website.</p>
+
+<p><img src="/assets/github-deploy-commit-message.png" alt="GitHub Deploy Commit Message" /></p>
+
+<p>Finally, we make sure the commits are always sync’d by enforcing that there are no uncommitted changes in the <code class="highlighter-rouge">jekyll</code> branch before deploying.
+Obviously you can manually mess things up, but it’s a good enough for now.</p>
+
+<p>This script will allow me to customize and complicate the build my site while maintaining some sanity in my builds.
+Feel free to use this script as a basis for your own GitHub pages deployment, you’ll probably need to modify it quite heavily for your use case, but I think the idea behind it is simple enough.</p>
+
+<p>Hope you find it useful.</p>
+
+
+  </div>
+
+  <div class="post-footer">
+    By: <a href="http://twitter.com/thmsmlr">@thmsmlr</a>
+  </div>
+</article>
+
+    </div>
+
+  </body>
+
+</html>
