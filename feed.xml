@@ -6,12 +6,12 @@
 </description>
     <link>http://thmsmlr.com/</link>
     <atom:link href="http://thmsmlr.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Aug 2016 22:54:55 -0400</pubDate>
-    <lastBuildDate>Wed, 17 Aug 2016 22:54:55 -0400</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2016 23:04:49 -0400</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2016 23:04:49 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
-        <title>Duct-Taping GitHub Pages</title>
+        <title>Manual GitHub Pages Deployment</title>
         <description>&lt;p class=&quot;lead&quot;&gt;Batteries included can serve you well, but sometimes you just want more control.&lt;/p&gt;
 
 &lt;p&gt;GitHub Pages provides an easy, free way to host a website.
@@ -117,8 +117,8 @@ Feel free to use this script as a basis for your own GitHub pages deployment, yo
 
 </description>
         <pubDate>Sun, 14 Aug 2016 10:34:03 -0400</pubDate>
-        <link>http://thmsmlr.com/posts/duct-taping-github-pages</link>
-        <guid isPermaLink="true">http://thmsmlr.com/posts/duct-taping-github-pages</guid>
+        <link>http://thmsmlr.com/posts/manual-github-pages-deployment</link>
+        <guid isPermaLink="true">http://thmsmlr.com/posts/manual-github-pages-deployment</guid>
         
         
       </item>
